@@ -17,7 +17,6 @@ export type PromoCode = {
   type: 'starter' | 'standard';
   region: 'emea' | 'americas' | 'asia-pacific';
   is_used: boolean;
-  redeem_date: string | null;
   created_at: string;
 };
 

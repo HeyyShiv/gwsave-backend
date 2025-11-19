@@ -1,18 +1,16 @@
 import React from 'react';
-import { Code, BarChart3, Users, FileText, CheckCircle } from 'lucide-react';
+import { Code, BarChart3, Users, FileText } from 'lucide-react';
 import { ManagementPage } from './components/ManagementPage';
 import { StatisticsPage } from './components/StatisticsPage';
 import { BlogManagementPage } from './components/BlogManagementPage';
-import { UsedCodesPage } from './components/UsedCodesPage';
 import { Button } from './components/ui/ui/button';
 import { cn } from './lib/utils';
 
 function App() {
-  const [currentPage, setCurrentPage] = React.useState<'management' | 'statistics' | 'blog' | 'used-codes'>('management');
+  const [currentPage, setCurrentPage] = React.useState<'management' | 'statistics' | 'blog'>('management');
 
   const navigation = [
     { id: 'management', label: 'Manage Codes', icon: Users },
-    { id: 'used-codes', label: 'Used Codes', icon: CheckCircle },
     { id: 'statistics', label: 'Statistics', icon: BarChart3 },
     { id: 'blog', label: 'Blog Posts', icon: FileText }
   ];
@@ -36,7 +34,7 @@ function App() {
                   key={nav.id}
                   variant="ghost"
                   size="sm"
-                  onClick={() => setCurrentPage(nav.id as 'management' | 'statistics' | 'blog' | 'used-codes')}
+                  onClick={() => setCurrentPage(nav.id as 'management' | 'statistics' | 'blog')}
                 >
                   <nav.icon className="w-4 h-4 mr-2" />
                   {nav.label}
@@ -49,7 +47,6 @@ function App() {
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {currentPage === 'management' && <ManagementPage />}
-        {currentPage === 'used-codes' && <UsedCodesPage />}
         {currentPage === 'statistics' && <StatisticsPage />}
         {currentPage === 'blog' && <BlogManagementPage />}
       </main>

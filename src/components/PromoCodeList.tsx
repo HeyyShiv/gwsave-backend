@@ -199,19 +199,12 @@ export function PromoCodeList({ promoCodes, loading, onDeleteCode, onRefresh }: 
                         <TableHead>Code</TableHead>
                         <TableHead>Type</TableHead>
                         <TableHead>Region</TableHead>
-                        <TableHead>Redeemed</TableHead>
                         <TableHead>Created</TableHead>
                         <TableHead>Actions</TableHead>
                       </TableRow>
                     </TableHeader>
                     <TableBody>
-                      {usedCodes
-                        .sort((a, b) => {
-                          if (!a.redeem_date) return 1;
-                          if (!b.redeem_date) return -1;
-                          return new Date(b.redeem_date).getTime() - new Date(a.redeem_date).getTime();
-                        })
-                        .map((code) => (
+                      {usedCodes.map((code) => (
                         <TableRow key={code.id} className="opacity-75">
                           <TableCell>
                             <span className="font-mono text-sm line-through text-muted-foreground">{code.code}</span>
@@ -225,20 +218,6 @@ export function PromoCodeList({ promoCodes, loading, onDeleteCode, onRefresh }: 
                             <Badge variant="outline">
                               {code.region === 'emea' ? 'EMEA' : code.region === 'americas' ? 'Americas' : 'Asia-Pacific'}
                             </Badge>
-                          </TableCell>
-                          <TableCell className="text-sm">
-                            {code.redeem_date ? (
-                              <div>
-                                <div className="font-medium text-gray-700">
-                                  {new Date(code.redeem_date).toLocaleDateString()}
-                                </div>
-                                <div className="text-xs text-muted-foreground">
-                                  {new Date(code.redeem_date).toLocaleTimeString()}
-                                </div>
-                              </div>
-                            ) : (
-                              <span className="text-muted-foreground">N/A</span>
-                            )}
                           </TableCell>
                           <TableCell className="text-sm text-muted-foreground">
                             {new Date(code.created_at).toLocaleDateString()}
